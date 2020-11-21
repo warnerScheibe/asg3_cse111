@@ -59,12 +59,12 @@ int main (int argc, char** argv) {
          throw "line ignored";
          continue;
       }
-      if (regex_search (line, result, key_value_regex)) {
-         str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
-          
-          test.insert(pair);
-          
-      }
+//      if (regex_search (line, result, key_value_regex)) {
+//         str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
+//          
+//          test.insert(pair);
+//          
+//      }
       else if (regex_search (line, result, trimmed_regex)) {
          cout << "query: \"" << result[1] << "\"" << endl;
       }
