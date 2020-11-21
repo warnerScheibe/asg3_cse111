@@ -1,8 +1,8 @@
-# $Id: Makefile,v 1.24 2019-10-22 12:41:48-07 - - $
+# $Id: Makefile,v 1.26 2020-10-22 16:52:39-07 - - $
 
 MKFILE      = Makefile
 DEPFILE     = ${MKFILE}.dep
-NOINCL      = ci clean spotless
+NOINCL      = ci clean spotless check lint
 NEEDINCL    = ${filter ${NOINCL}, ${MAKECMDGOALS}}
 GMAKE       = ${MAKE} --no-print-directory
 
@@ -28,13 +28,16 @@ ${EXECBIN} : ${OBJECTS}
 	${COMPILECPP} -o $@ ${OBJECTS}
 
 %.o : %.cpp
-	- ${UTILBIN}/checksource $<
-	- ${UTILBIN}/cpplint.py.perl $<
 	${COMPILECPP} -c $<
+
+lint : ${CPPSOURCE}
+	${UTILBIN}/cpplint.py.perl ${CPPSOURCE}
+
+check : ${ALLSOURCES}
+	${UTILBIN}/checksource ${ALLSOURCES}
 
 ci : ${ALLSOURCES}
 	${UTILBIN}/cid -is ${ALLSOURCES}
-	- ${UTILBIN}/checksource ${ALLSOURCES}
 
 lis : ${ALLSOURCES}
 	mkpspdf ${LISTING} ${ALLSOURCES}

@@ -1,3 +1,4 @@
+
 // $Id: listmap.tcc,v 1.15 2019-10-30 12:44:53-07 - - $
 
 #include "listmap.h"
@@ -47,4 +48,11 @@ listmap<key_t,mapped_t,less_t>::erase (iterator position) {
    return iterator();
 }
 
+template <typename Key, typename Value, class less_t>
+void listmap<Key,Value,Less>::print_list() {
 
+  for (auto it = this->begin(); it != this->end(); ++it)
+  {
+     cout << *it << endl;
+  }
+}

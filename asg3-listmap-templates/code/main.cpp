@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <regex>
+#include <cassert>
 
 using namespace std;
 
@@ -36,23 +38,39 @@ int main (int argc, char** argv) {
    sys_info::execname (argv[0]);
    scan_options (argc, argv);
 
+   
    str_str_map test;
-   for (char** argp = &argv[optind]; argp != &argv[argc]; ++argp) {
-      str_str_pair pair (*argp, to_string<int> (argp - argv));
-      cout << "Before insert: " << pair << endl;
-      test.insert (pair);
+   regex comment_regex {R"(^\s*(#.*)?$)"};
+   regex key_value_regex {R"(^\s*(.*?)\s*=\s*(.*?)\s*$)"};
+   regex trimmed_regex {R"(^\s*([^=]+?)\s*$)"};
+    
+   for (;;) {
+      string line;
+      getline (cin, line);
+      if (cin.eof()) break;
+      cout << endl << "input: \"" << line << "\"" << endl;
+      smatch result;
+      if (regex_search (line, result, comment_regex)) {
+         cout << "Comment or empty line." << endl;
+         continue;
+      }
+      if(line.find("=") == string::npos &&
+         line.find(" ") != string::npos){
+         throw "line ignored";
+         continue;
+      }
+      if (regex_search (line, result, key_value_regex)) {
+         str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
+          
+          test.insert(pair);
+          
+      }
+      else if (regex_search (line, result, trimmed_regex)) {
+         cout << "query: \"" << result[1] << "\"" << endl;
+      }
+      else {
+         assert (false and "This can not happen.");
+      }
    }
-
-   cout << test.empty() << endl;
-   for (str_str_map::iterator itor = test.begin();
-        itor != test.end(); ++itor) {
-      cout << "During iteration: " << *itor << endl;
-   }
-
-   str_str_map::iterator itor = test.begin();
-   test.erase (itor);
-
-   cout << "EXIT_SUCCESS" << endl;
-   return EXIT_SUCCESS;
+   return 0;
 }
-
