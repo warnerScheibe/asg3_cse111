@@ -1,4 +1,3 @@
-
 // $Id: listmap.tcc,v 1.15 2019-10-30 12:44:53-07 - - $
 
 #include "listmap.h"
@@ -25,7 +24,12 @@ template <typename key_t, typename mapped_t, class less_t>
 typename listmap<key_t,mapped_t,less_t>::iterator
 listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
    DEBUGF ('l', &pair << "->" << pair);
-   return iterator();
+   node* anchor = end();
+   node* new_node = node(anchor, anchor -> prev, pair);
+   anchor -> prev -> next = new_node;
+   anchor -> prev = new_node;
+   iterator new_it = iterator(new_node);
+   return new_it;
 }
 
 //
@@ -35,7 +39,15 @@ template <typename key_t, typename mapped_t, class less_t>
 typename listmap<key_t,mapped_t,less_t>::iterator
 listmap<key_t,mapped_t,less_t>::find (const key_type& that) {
    DEBUGF ('l', that);
-   return iterator();
+   iterator it = begin();
+   for( ; it != end() ; ++it )
+   {
+      if (*it -> value -> first == that)
+      {
+         break;
+      }
+   }
+   return it;
 }
 
 //
@@ -48,11 +60,4 @@ listmap<key_t,mapped_t,less_t>::erase (iterator position) {
    return iterator();
 }
 
-template <typename Key, typename Value, class less_t>
-void listmap<Key,Value,Less>::print_list() {
 
-  for (auto it = this->begin(); it != this->end(); ++it)
-  {
-     cout << *it << endl;
-  }
-}
