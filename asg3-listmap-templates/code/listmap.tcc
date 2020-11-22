@@ -61,8 +61,8 @@ listmap<key_t,mapped_t,less_t>::erase (iterator position) {
 }
 
 
-template <typename Key, typename Value, class less_t>
-void listmap<key_t,mapped_t,less_t>::print_list() {
+template <typename key_t, typename mapped_t, class less_t>
+listmap<key_t,mapped_t,less_t>::print_list() {
 
   for (auto it = this->begin(); it != this->end(); ++it)
   {
