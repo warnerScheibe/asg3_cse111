@@ -1,4 +1,6 @@
 // $Id: main.cpp,v 1.11 2018-01-25 14:19:29-08 - - $
+// Warner Scheibe   (wscheibe@ucsc.edu)
+// Alain Kassarjian (akassarj@ucsc.edu)
 
 #include <cstdlib>
 #include <exception>
