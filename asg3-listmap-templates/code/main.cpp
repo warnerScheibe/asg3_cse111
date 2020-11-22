@@ -69,6 +69,16 @@ int main (int argc, char** argv) {
           test.print_list();
 
       }
+       if(line.at(1).compare("=") == 0 &&
+          line.size() == 1){
+           if(test.size() != 0){
+               test.print_list(); //need to call this more than once or make 2 print functions
+           }
+           else{
+               cout << "map is empty " << endl;
+           }
+           continue;
+       }
        
       else if (regex_search (line, result, trimmed_regex)) {
          cout << "query: \"" << result[1] << "\"" << endl;
