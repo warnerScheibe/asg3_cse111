@@ -65,7 +65,7 @@ int main (int argc, char** argv) {
       else if(line.at(0) == '=' &&
           line.size() == 1){
            if(!test.empty()){
-               test.print_list(); //need to call this more than once or make 2 print functions
+               test.print_list(); 
            }
            else{
                cout << "map is empty " << endl;
@@ -89,7 +89,9 @@ int main (int argc, char** argv) {
       else if (regex_search (line, result, key_value_regex)) {
           cout << "key  : \"" << result[1] << "\"" << endl;
           cout << "value: \"" << result[2] << "\"" << endl;
-          str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
+          
+          //declared here to make sure no errors
+          str_str_pair pair (result[1], result[2]);
           test.insert(pair);
           //test.find(result[1]);
           test.print_pair(pair);
