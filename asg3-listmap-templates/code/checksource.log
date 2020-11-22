@@ -1,0 +1,3 @@
+checksource: line length > 72 characters
+   file "main.cpp": 1 errors: line 63
+checksource: TOTAL COMPLAINTS: 1
