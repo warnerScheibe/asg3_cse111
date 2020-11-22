@@ -41,6 +41,7 @@ class listmap {
       iterator end() { return anchor(); }
       bool empty() const { return anchor_.next == &anchor_; }
       iterator print_list();
+      iterator print_pair(const value_type&);
 };
 
 
