@@ -54,24 +54,15 @@ int main (int argc, char** argv) {
          cout << "Comment or empty line." << endl;
          continue;
       }
-      if(line.find("=") == string::npos &&
-         line.find(" ") != string::npos){
-         throw "line ignored";
-         continue;
-      }
+      //if(line.find("=") == string::npos &&
+      //   line.find(" ") != string::npos){
+      //   throw "line ignored";
+      //   continue;
+      //}
        
-      if (regex_search (line, result, key_value_regex)) {
-          cout << "key  : \"" << result[1] << "\"" << endl;
-          cout << "value: \"" << result[2] << "\"" << endl;
-          str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
-          test.insert(pair);
-          //test.find(result[1]);
-          test.print_list();
-
-      }
-       if(line.at(1).compare("=") == 0 &&
+      else if(line.at(0) == '=' &&
           line.size() == 1){
-           if(test.size() != 0){
+           if(!test.empty()){
                test.print_list(); //need to call this more than once or make 2 print functions
            }
            else{
@@ -79,6 +70,15 @@ int main (int argc, char** argv) {
            }
            continue;
        }
+      else if (regex_search (line, result, key_value_regex)) {
+          cout << "key  : \"" << result[1] << "\"" << endl;
+          cout << "value: \"" << result[2] << "\"" << endl;
+          str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
+          test.insert(pair);
+          //test.find(result[1]);
+          //test.print_list();
+
+      }
        
       else if (regex_search (line, result, trimmed_regex)) {
          cout << "query: \"" << result[1] << "\"" << endl;
