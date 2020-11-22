@@ -1,4 +1,6 @@
 // $Id: util.cpp,v 1.18 2020-02-06 12:55:59-08 - - $
+// Warner Scheibe   (wscheibe@ucsc.edu)
+// Alain Kassarjian (akassarj@ucsc.edu)
 
 #include <cassert>
 #include <cerrno>
