@@ -61,9 +61,11 @@ int main (int argc, char** argv) {
       }
        
       if (regex_search (line, result, key_value_regex)) {
-         str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
-
-          test.find(result[1]);
+          cout << "key  : \"" << result[1] << "\"" << endl;
+          cout << "value: \"" << result[2] << "\"" << endl;
+          str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
+          test.insert(pair);
+          //test.find(result[1]);
           test.print_list();
 
       }
