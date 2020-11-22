@@ -1,6 +1,4 @@
 // $Id: listmap.tcc,v 1.15 2019-10-30 12:44:53-07 - - $
-// Warner Scheibe   (wscheibe@ucsc.edu)
-// Alain Kassarjian (akassarj@ucsc.edu)
 
 #include "listmap.h"
 #include "debug.h"
@@ -94,6 +92,13 @@ listmap<key_t,mapped_t,less_t>::erase (iterator position) {
    return new_it;
 }
 
+template <typename key_t, typename mapped_t, class less_t>
+typename listmap<key_t,mapped_t,less_t>::iterator
+listmap<key_t,mapped_t,less_t>::print_pair(const value_type& pair) {
+   
+   cout << pair.first << " = " << pair.second << endl;
+   return iterator(find(pair.first));
+}
 
 template <typename key_t, typename mapped_t, class less_t>
 typename listmap<key_t,mapped_t,less_t>::iterator
@@ -101,7 +106,7 @@ listmap<key_t,mapped_t,less_t>::print_list() {
 
   for (auto it = this->begin(); it != this->end(); ++it)
   {
-     cout << *it << endl;
+     print_pair(*it);
   }
   
   return iterator();
@@ -112,12 +117,4 @@ listmap<key_t,mapped_t,less_t>::print_list() {
   
   
   
-}
-
-template <typename key_t, typename mapped_t, class less_t>
-typename listmap<key_t,mapped_t,less_t>::iterator
-listmap<key_t,mapped_t,less_t>::print_pair(const value_type& pair) {
-   
-   cout << "{" << pair.first << "," << pair.second << "}" << endl;
-   return iterator(find(pair.first));
 }

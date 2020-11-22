@@ -1,6 +1,4 @@
 // $Id: listmap.h,v 1.21 2019-10-30 12:44:53-07 - - $
-// Warner Scheibe   (wscheibe@ucsc.edu)
-// Alain Kassarjian (akassarj@ucsc.edu)
 
 #ifndef __LISTMAP_H__
 #define __LISTMAP_H__

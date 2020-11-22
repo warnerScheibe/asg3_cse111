@@ -42,6 +42,7 @@ int main (int argc, char** argv) {
 
    
    str_str_map test;
+   int command_number = 0;
    regex comment_regex {R"(^\s*(#.*)?$)"};
    regex key_value_regex {R"(^\s*(.*?)\s*=\s*(.*?)\s*$)"};
    regex key_equals_regex {R"(^\s*(.*)\s*=\s*$)"};
@@ -51,12 +52,14 @@ int main (int argc, char** argv) {
     
    for (;;) {
       string line;
+      command_number++;
       getline (cin, line);
       if (cin.eof()) break;
       //cout << endl << "input: \"" << line << "\"" << endl;
+      cout << "-: " << command_number << ": " << line << endl;
       smatch result;
       if (regex_search (line, result, comment_regex)) {
-         cout << "Comment or empty line." << endl;
+         //cout << "Comment or empty line." << endl;
          continue;
       }
       //if(line.find("=") == string::npos &&
@@ -70,9 +73,9 @@ int main (int argc, char** argv) {
            if(!test.empty()){
                test.print_list(); 
            }
-           else{
-               cout << "map is empty " << endl;
-           }
+           //else{
+           //    cout << "map is empty " << endl;
+           //}
            continue;
        }
       else if (regex_search (line, result, key_equals_regex))
