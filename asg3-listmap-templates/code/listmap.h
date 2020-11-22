@@ -40,6 +40,7 @@ class listmap {
       iterator begin() { return anchor()->next; }
       iterator end() { return anchor(); }
       bool empty() const { return anchor_.next == &anchor_; }
+      iterator print_list();
 };
 
 

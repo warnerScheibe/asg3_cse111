@@ -64,7 +64,8 @@ int main (int argc, char** argv) {
          str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
 
           test.find(result[1]);
-          test.prinn_list();
+          if(
+          test.print_list();
 
       }
        

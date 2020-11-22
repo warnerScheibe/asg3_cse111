@@ -40,10 +40,12 @@ typename listmap<key_t,mapped_t,less_t>::iterator
 listmap<key_t,mapped_t,less_t>::find (const key_type& that) {
    DEBUGF ('l', that);
    iterator it = begin();
+   cout << "found find" << endl;
    for( ; it != end() ; ++it )
    {
-      if (*it -> value -> first == that)
+      if (it -> first == that)
       {
+         cout << "found key" << endl;
          break;
       }
    }
@@ -62,6 +64,7 @@ listmap<key_t,mapped_t,less_t>::erase (iterator position) {
 
 
 template <typename key_t, typename mapped_t, class less_t>
+typename listmap<key_t,mapped_t,less_t>::iterator
 listmap<key_t,mapped_t,less_t>::print_list() {
 
   for (auto it = this->begin(); it != this->end(); ++it)
@@ -69,7 +72,7 @@ listmap<key_t,mapped_t,less_t>::print_list() {
      cout << *it << endl;
   }
   
-  
+  return iterator();
   
   
   
