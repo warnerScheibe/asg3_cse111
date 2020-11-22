@@ -42,22 +42,19 @@ listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
          new_node = new node(it.where, it.where -> prev, pair);
          it.where -> prev -> next = new_node;
          it.where -> prev = new_node;
-         break;
+         iterator new_it = iterator(new_node);
+         return new_it;
       }
       else if(pair.first == it -> first)
       {
          it -> second = pair.second;
-         break;
-      }
-      else
-      {
-         new_node = new node(anchor(), it.where, pair);
-         it.where -> next = new_node;
-         anchor() -> prev = new_node;
-         break;
+         return it;
       }
    }
 
+   new_node = new node(anchor(), anchor() -> prev, pair);
+   anchor() -> prev -> next = new_node;
+   anchor() -> prev = new_node;
    iterator new_it = iterator(new_node);
    return new_it;
 }
