@@ -1,0 +1,27 @@
+
+input: "key=value"
+
+input: "second=third"
+
+input: "foo=bar"
+
+input: "f1=51"
+
+input: "f2=52"
+
+input: "foobar=baz"
+
+input: "baz=quux"
+
+input: "this=is=a=test"
+
+input: "="
+
+input: "a=value"
+
+input: "b=value"
+
+input: "=value"
+
+input: "# $Id: test2.in,v 1.1 2016-06-28 14:48:38-07 - - $"
+Comment or empty line.
