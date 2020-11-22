@@ -84,9 +84,10 @@ template <typename key_t, typename mapped_t, class less_t>
 typename listmap<key_t,mapped_t,less_t>::iterator
 listmap<key_t,mapped_t,less_t>::erase (iterator position) {
    DEBUGF ('l', &*position);
+   cout << "erasing" << endl;
    position.where -> next -> prev = position.where -> prev;
    position.where -> prev -> next = position.where -> next;
-   iterator new_it = position.where -> next;
+   iterator new_it = iterator(position.where -> next);
    delete(position.where);
    return new_it;
 }
@@ -109,4 +110,12 @@ listmap<key_t,mapped_t,less_t>::print_list() {
   
   
   
+}
+
+template <typename key_t, typename mapped_t, class less_t>
+typename listmap<key_t,mapped_t,less_t>::iterator
+listmap<key_t,mapped_t,less_t>::print_pair(const value_type& pair) {
+   
+   cout << "{" << pair.first << "," << pair.second << "}" << endl;
+   return iterator(find(pair.first));
 }

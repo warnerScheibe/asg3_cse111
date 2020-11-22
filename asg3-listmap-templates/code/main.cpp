@@ -42,6 +42,8 @@ int main (int argc, char** argv) {
    str_str_map test;
    regex comment_regex {R"(^\s*(#.*)?$)"};
    regex key_value_regex {R"(^\s*(.*?)\s*=\s*(.*?)\s*$)"};
+   regex key_equals_regex {R"(^\s*(.*)\s*=\s*$)"};
+   regex equals_value_regex {R"(^\s*[=]\s*(.*?)\s*$)"};
    regex trimmed_regex {R"(^\s*([^=]+?)\s*$)"};
     
    for (;;) {
@@ -70,16 +72,28 @@ int main (int argc, char** argv) {
            }
            continue;
        }
+      else if (regex_search (line, result, key_equals_regex))
+      {
+          test.erase(test.find(result[1]));
+      }
+      else if (regex_search (line, result, equals_value_regex)) {
+		  auto it = test.begin();
+		  for ( ; it != test.end(); ++it)
+		  {
+			  if(result[1] == it -> second)
+			  {
+				  test.print_pair(*it);
+		      }
+	      }
+      }
       else if (regex_search (line, result, key_value_regex)) {
           cout << "key  : \"" << result[1] << "\"" << endl;
           cout << "value: \"" << result[2] << "\"" << endl;
           str_str_pair pair (result[1], result[2]); //declared here to make sure no errors
           test.insert(pair);
           //test.find(result[1]);
-          //test.print_list();
-
+          test.print_pair(pair);
       }
-       
       else if (regex_search (line, result, trimmed_regex)) {
          cout << "query: \"" << result[1] << "\"" << endl;
          test.find(result[1]);
