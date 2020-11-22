@@ -45,12 +45,13 @@ int main (int argc, char** argv) {
    regex key_equals_regex {R"(^\s*(.*)\s*=\s*$)"};
    regex equals_value_regex {R"(^\s*[=]\s*(.*?)\s*$)"};
    regex trimmed_regex {R"(^\s*([^=]+?)\s*$)"};
+   regex key_regex {R"(^\s*(.*)\s*?$)"};
     
    for (;;) {
       string line;
       getline (cin, line);
       if (cin.eof()) break;
-      cout << endl << "input: \"" << line << "\"" << endl;
+      //cout << endl << "input: \"" << line << "\"" << endl;
       smatch result;
       if (regex_search (line, result, comment_regex)) {
          cout << "Comment or empty line." << endl;
@@ -97,6 +98,17 @@ int main (int argc, char** argv) {
           //test.find(result[1]);
           test.print_pair(pair);
       }
+      else if (regex_search (line, result, key_regex))
+      {
+          if(test.find(result[1]) != test.end())
+          {
+             test.print_pair(*test.find(result[1]));
+	      }
+	      else
+	      {
+             cout << result[1] << ": key not found" << endl;
+	      }
+	  }
       else if (regex_search (line, result, trimmed_regex)) {
          cout << "query: \"" << result[1] << "\"" << endl;
          test.find(result[1]);
