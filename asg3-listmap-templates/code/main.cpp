@@ -76,19 +76,20 @@ int main (int argc, char** argv) {
       {
           test.erase(test.find(result[1]));
       }
-      else if (regex_search (line, result, equals_value_regex)) {
-		  auto it = test.begin();
-		  for ( ; it != test.end(); ++it)
-		  {
-			  if(result[1] == it -> second)
-			  {
-				  test.print_pair(*it);
-		      }
-	      }
+      else if (regex_search (line, result,
+                             equals_value_regex)) {
+         auto it = test.begin();
+         for ( ; it != test.end(); ++it)
+         {
+             if(result[1] == it -> second)
+             {
+                test.print_pair(*it);
+             }
+             }
       }
       else if (regex_search (line, result, key_value_regex)) {
-          cout << "key  : \"" << result[1] << "\"" << endl;
-          cout << "value: \"" << result[2] << "\"" << endl;
+//          cout << "key  : \"" << result[1] << "\"" << endl;
+//          cout << "value: \"" << result[2] << "\"" << endl;
           
           //declared here to make sure no errors
           str_str_pair pair (result[1], result[2]);
