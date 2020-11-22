@@ -1,4 +1,6 @@
 // $Id: util.tcc,v 1.4 2020-02-06 12:33:29-08 - - $
+// Warner Scheibe   (wscheibe@ucsc.edu)
+// Alain Kassarjian (akassarj@ucsc.edu)
 
 #include <sstream>
 #include <typeinfo>

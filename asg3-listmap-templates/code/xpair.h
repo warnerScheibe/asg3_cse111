@@ -1,4 +1,6 @@
 // $Id: xpair.h,v 1.5 2019-02-21 17:27:16-08 - - $
+// Warner Scheibe   (wscheibe@ucsc.edu)
+// Alain Kassarjian (akassarj@ucsc.edu)
 
 #ifndef __XPAIR_H__
 #define __XPAIR_H__

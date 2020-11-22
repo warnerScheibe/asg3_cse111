@@ -1,4 +1,6 @@
 // $Id: listmap.tcc,v 1.15 2019-10-30 12:44:53-07 - - $
+// Warner Scheibe   (wscheibe@ucsc.edu)
+// Alain Kassarjian (akassarj@ucsc.edu)
 
 #include "listmap.h"
 #include "debug.h"

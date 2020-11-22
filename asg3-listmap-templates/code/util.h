@@ -1,4 +1,6 @@
 // $Id: util.h,v 1.8 2020-02-06 12:52:28-08 - - $
+// Warner Scheibe   (wscheibe@ucsc.edu)
+// Alain Kassarjian (akassarj@ucsc.edu)
 
 //
 // util -
