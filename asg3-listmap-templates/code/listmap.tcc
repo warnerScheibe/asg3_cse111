@@ -15,6 +15,7 @@
 template <typename key_t, typename mapped_t, class less_t>
 listmap<key_t,mapped_t,less_t>::~listmap() {
    DEBUGF ('l', reinterpret_cast<const void*> (this));
+   
 }
 
 //
@@ -24,10 +25,34 @@ template <typename key_t, typename mapped_t, class less_t>
 typename listmap<key_t,mapped_t,less_t>::iterator
 listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
    DEBUGF ('l', &pair << "->" << pair);
-   node* anchor = end();
-   node* new_node = node(anchor, anchor -> prev, pair);
-   anchor -> prev -> next = new_node;
-   anchor -> prev = new_node;
+   node* new_node;
+   if(empty())
+   {
+      //node* anchor = end();
+      new_node = node(anchor(), anchor(), pair);
+      anchor() -> prev -> next = new_node;
+      anchor() -> prev = new_node;
+   }
+
+   for (auto it = begin(); it != end(); ++it)
+   {
+      if(less(pair -> first, it -> first))
+      {
+         continue;
+      }
+      else if(pair -> first == it -> first)
+      {
+         it -> second = pair -> second;
+      }
+      else
+      {
+         //node* anchor = end();
+         new_node = node(anchor(), it, pair);
+         it.where -> next = new_node;
+         anchor() -> prev = new_node;
+      }
+   }
+
    iterator new_it = iterator(new_node);
    return new_it;
 }
