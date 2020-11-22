@@ -28,7 +28,7 @@ listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
    node* new_node;
    if(empty())
    {
-      new_node = node(anchor(), anchor(), pair);
+      new_node = new node(anchor(), anchor(), pair);
       anchor() -> prev -> next = new_node;
       anchor() -> prev = new_node;
    }
@@ -45,7 +45,7 @@ listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
       }
       else
       {
-         new_node = node(anchor(), it.where, pair);
+         new_node = new node(anchor(), it.where, pair);
          it.where -> next = new_node;
          anchor() -> prev = new_node;
       }
