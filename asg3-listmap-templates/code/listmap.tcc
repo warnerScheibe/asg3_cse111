@@ -40,12 +40,14 @@ listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
       if(less(pair.first, it -> first))
       {
          new_node = new node(it.where, it.where -> prev, pair);
-         it.where -> prev -> prev -> next = new_node;
+         it.where -> prev -> next = new_node;
          it.where -> prev = new_node;
+         break;
       }
       else if(pair.first == it -> first)
       {
          it -> second = pair.second;
+         break;
       }
       else
       {
