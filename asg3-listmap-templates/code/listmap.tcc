@@ -15,19 +15,7 @@
 template <typename key_t, typename mapped_t, class less_t>
 listmap<key_t,mapped_t,less_t>::~listmap() {
    DEBUGF ('l', reinterpret_cast<const void*> (this));
-     if (this->size > 0) {
-        //cout << "the size of the data structure is: " << size << endl;
-        auto it = begin();
-        while (it != end()) {
-         this->erase(it);
-         it = begin();
-        }
-      
-       this->back->next = nullptr;
-       this->back->prev = nullptr;
-       delete back;
-     }
-   }
+   
 }
 
 //
