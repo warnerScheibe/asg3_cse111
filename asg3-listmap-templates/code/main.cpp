@@ -81,7 +81,7 @@ int main (int argc, char** argv) {
              {
                 test.print_pair(*it);
              }
-             }
+         }
       }
       else if (regex_search (line, result, key_value_regex)) {
           //declared here to make sure no errors
@@ -108,7 +108,6 @@ int main (int argc, char** argv) {
          assert (false and "This can not happen.");
       }
    }
-   cout << "main ended" << endl;
    return 0;
     
     
