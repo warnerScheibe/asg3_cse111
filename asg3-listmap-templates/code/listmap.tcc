@@ -35,6 +35,13 @@ listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
       return new_it;
    }
 
+   if(find(pair.first) != end())
+   {
+      find(pair.first) -> second = pair.second;
+      return iterator(find(pair.first));
+      
+   }
+
    for (auto it = begin(); it != end(); ++it)
    {
       if(less(pair.first, it -> first))
@@ -44,11 +51,6 @@ listmap<key_t,mapped_t,less_t>::insert (const value_type& pair) {
          it.where -> prev = new_node;
          iterator new_it = iterator(new_node);
          return new_it;
-      }
-      else if(pair.first == it -> first)
-      {
-         it -> second = pair.second;
-         return it;
       }
    }
 
@@ -69,7 +71,8 @@ listmap<key_t,mapped_t,less_t>::find (const key_type& that) {
    iterator it = begin();
    for( ; it != end() ; ++it )
    {
-      if (it -> first == that)
+      //if (it -> first == that)
+      if(!less(it -> first, that) && !less(that, it -> first))
       {
          break;
       }

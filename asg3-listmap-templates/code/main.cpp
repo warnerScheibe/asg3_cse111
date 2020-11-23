@@ -55,27 +55,17 @@ int main (int argc, char** argv) {
       command_number++;
       getline (cin, line);
       if (cin.eof()) break;
-      //cout << endl << "input: \"" << line << "\"" << endl;
       cout << "-: " << command_number << ": " << line << endl;
       smatch result;
       if (regex_search (line, result, comment_regex)) {
-         //cout << "Comment or empty line." << endl;
          continue;
       }
-      //if(line.find("=") == string::npos &&
-      //   line.find(" ") != string::npos){
-      //   throw "line ignored";
-      //   continue;
-      //}
        
       else if(line.at(0) == '=' &&
           line.size() == 1){
            if(!test.empty()){
                test.print_list(); 
            }
-           //else{
-           //    cout << "map is empty " << endl;
-           //}
            continue;
        }
       else if (regex_search (line, result, key_equals_regex))
@@ -94,13 +84,9 @@ int main (int argc, char** argv) {
              }
       }
       else if (regex_search (line, result, key_value_regex)) {
-//          cout << "key  : \"" << result[1] << "\"" << endl;
-//          cout << "value: \"" << result[2] << "\"" << endl;
-          
           //declared here to make sure no errors
           str_str_pair pair (result[1], result[2]);
           test.insert(pair);
-          //test.find(result[1]);
           test.print_pair(pair);
       }
       else if (regex_search (line, result, key_regex))
@@ -108,12 +94,12 @@ int main (int argc, char** argv) {
           if(test.find(result[1]) != test.end())
           {
              test.print_pair(*test.find(result[1]));
-	      }
-	      else
-	      {
+          }
+          else
+          {
              cout << result[1] << ": key not found" << endl;
-	      }
-	  }
+          }
+      }
       else if (regex_search (line, result, trimmed_regex)) {
          cout << "query: \"" << result[1] << "\"" << endl;
          test.find(result[1]);
@@ -122,6 +108,7 @@ int main (int argc, char** argv) {
          assert (false and "This can not happen.");
       }
    }
+   cout << "main ended" << endl;
    return 0;
     
     
