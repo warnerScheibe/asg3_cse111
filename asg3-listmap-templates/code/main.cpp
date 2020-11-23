@@ -20,6 +20,7 @@ using namespace std;
 using str_str_map = listmap<string,string>;
 using str_str_pair = str_str_map::value_type;
 fstream infile;
+string filename;
 
 void scan_options (int argc, char** argv) {
    opterr = 0;
@@ -44,7 +45,12 @@ int main (int argc, char** argv) {
 
    if (argc > 1)
    {
-	   infile.open(argv[1]);
+       infile.open(argv[1]);
+       filename = argv[1];
+   }
+   else
+   {
+       filename = "-";
    }
    
    str_str_map test;
@@ -66,10 +72,10 @@ int main (int argc, char** argv) {
       }
       else
       {
-		  getline(cin, line);
-		  if (cin.eof()) break;
-	  }
-      cout << "-: " << command_number << ": " << line << endl;
+          getline(cin, line);
+          if (cin.eof()) break;
+      }
+      cout <<filename<< ": " << command_number << ": " << line << endl;
       smatch result;
       if (regex_search (line, result, comment_regex)) {
          continue;
