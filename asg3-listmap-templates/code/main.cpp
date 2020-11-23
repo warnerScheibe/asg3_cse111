@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <regex>
 #include <cassert>
+#include <fstream>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ using namespace std;
 
 using str_str_map = listmap<string,string>;
 using str_str_pair = str_str_map::value_type;
+fstream infile;
 
 void scan_options (int argc, char** argv) {
    opterr = 0;
@@ -40,6 +42,10 @@ int main (int argc, char** argv) {
    sys_info::execname (argv[0]);
    scan_options (argc, argv);
 
+   if (argc > 1)
+   {
+	   infile.open(argv[1]);
+   }
    
    str_str_map test;
    int command_number = 0;
@@ -53,8 +59,16 @@ int main (int argc, char** argv) {
    for (;;) {
       string line;
       command_number++;
-      getline (cin, line);
-      if (cin.eof()) break;
+      if(infile.is_open())
+      {
+         getline (infile, line);
+         if (infile.eof()) break;
+      }
+      else
+      {
+		  getline(cin, line);
+		  if (cin.eof()) break;
+	  }
       cout << "-: " << command_number << ": " << line << endl;
       smatch result;
       if (regex_search (line, result, comment_regex)) {
