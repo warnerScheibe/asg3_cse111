@@ -46,6 +46,10 @@ int main (int argc, char** argv) {
    if (argc > 1)
    {
        infile.open(argv[1]);
+       if(infile.fail())
+       {
+          return 1;
+       }
        filename = argv[1];
    }
    else
